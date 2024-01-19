@@ -2,18 +2,18 @@ using CleanArchMvc.Domain.Entities;
 
 namespace CleanArchMvc.Domain.Interfaces
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetProductsAsync();
 
-        Task<Category> GetByIdAsync(int? id);
+        Task<Product> GetByIdAsync(int? id);
 
-        Task<IEnumerable<Product>> GetProductCategoryAsync();
+        Task<Product> GetProductCategoryAsync(int? id);
 
-        Task<Category> CreateAsync(Category category);
+        Task<Product> CreateAsync(Product product);
         
-        Task<Category> UpdateAsync(Category category);
+        Task<Product> UpdateAsync(Product product);
         
-        Task<Category> RemoveAsync(Category category);
+        Task<Product> RemoveAsync(Product product);
     }
 }

@@ -2,7 +2,7 @@ using CleanArchMvc.Domain.Entities;
 
 namespace CleanArchMvc.Domain.Interfaces
 {
-    interface ICategoruRepository
+    public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> GetCategoriesAsync();
 
