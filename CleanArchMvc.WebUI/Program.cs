@@ -1,3 +1,4 @@
+using CleanArchMvc.Domain.Account;
 using CleanArchMvc.Infra.IoC;
 internal class Program
 {
@@ -24,6 +25,15 @@ internal class Program
 
         app.UseRouting();
 
+        using (var serviceScope = app.Services.CreateScope())
+        {
+            var services = serviceScope.ServiceProvider;
+            var seedUserRoleInitial = services.GetService<ISeedUserRoleInitial>();
+            seedUserRoleInitial.SeedRoles();
+            seedUserRoleInitial.SeedUsers();
+        }
+
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(

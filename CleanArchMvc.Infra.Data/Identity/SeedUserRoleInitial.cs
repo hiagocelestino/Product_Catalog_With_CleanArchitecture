@@ -17,6 +17,25 @@ namespace CleanArchMvc.Infra.Data.Identity
 
         public void SeedRoles()
         {
+            if (!_roleManager.RoleExistsAsync("User").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "User";
+                role.NormalizedName = "USER";
+                IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
+            }
+
+            if (!_roleManager.RoleExistsAsync("Admin").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "Admin";
+                role.NormalizedName = "ADMIN";
+                IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
+            }
+        }
+
+        public void SeedUsers()
+        {
             if (_userManager.FindByEmailAsync("usuario@localhost").Result == null)
             {
                 ApplicationUser user = new ApplicationUser();
@@ -53,25 +72,6 @@ namespace CleanArchMvc.Infra.Data.Identity
                 {
                     _userManager.AddToRoleAsync(user, "Admin").Wait();
                 }
-            }
-        }
-
-        public void SeedUsers()
-        {
-            if (!_roleManager.RoleExistsAsync("User").Result)
-            {
-                IdentityRole role = new IdentityRole();
-                role.Name = "User";
-                role.NormalizedName = "USER";
-                IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
-            }
-
-            if (!_roleManager.RoleExistsAsync("Admin").Result)
-            {
-                IdentityRole role = new IdentityRole();
-                role.Name = "Admin";
-                role.NormalizedName = "ADMIN";
-                IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
             }
         }
     }
